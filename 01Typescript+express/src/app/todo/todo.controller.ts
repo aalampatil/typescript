@@ -26,4 +26,31 @@ export class TodoController {
       res.status(500).json({ error });
     }
   }
+
+  public async handleDeleteTodo(req: Request, res: Response) {
+    try {
+      const id: string = req.body;
+      const todos = this._db;
+      const indextobeRemoved = todos.findIndex((todo) => todo.id === id);
+      if (indextobeRemoved > -1) todos.splice(indextobeRemoved, 1);
+
+      return res.json({ todos });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  public async handleGetTodoById(req: Request, res: Response) {
+    try {
+      // const id: string = req.body.id;
+      const id = req.params.id;
+      console.log(id);
+      const todos = this._db;
+      console.log(todos);
+      const todo = todos.find((todo) => todo.id === id);
+      return res.json({ todo });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
 }

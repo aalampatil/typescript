@@ -10,3 +10,9 @@ const controller = new TodoController();
 
 todoRouter.route("/").get(controller.handleGetaAllTodos.bind(controller));
 todoRouter.route("/add").post(controller.handleInsertTodo.bind(controller));
+todoRouter
+  .route("/remove")
+  .delete(controller.handleDeleteTodo.bind(controller));
+todoRouter
+  .route(`/todo/:id`)
+  .get(controller.handleGetTodoById.bind(controller));
